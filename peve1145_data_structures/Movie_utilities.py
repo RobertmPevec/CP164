@@ -146,11 +146,14 @@ def get_by_year(movies, year):
             year (list of Movie)
     -------------------------------------------------------
     """
-
-    # Your code here
-
+    ymovies = []
+    for movie in movies:
+        parts = movie.split("|")
+        movie_year = int(parts[1])
+        if movie_year == year:
+            title = parts[0]
+            ymovies.append(title)
     return ymovies
-
 
 def get_by_rating(movies, rating):
     """
@@ -168,9 +171,13 @@ def get_by_rating(movies, rating):
             greater than or equal to rating (list of Movie)
     -------------------------------------------------------
     """
-
-    # Your code here
-
+    rmovies = []
+    for r in movies:
+        parts = r.split("|")
+        movie_rating = float(parts[3])
+        if movie_rating >= rating:
+            title = parts[0]
+            rmovies.append(title)
     return rmovies
 
 
