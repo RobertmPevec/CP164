@@ -196,9 +196,14 @@ def get_by_genre(movies, genre):
             genre (list of Movie)
     -------------------------------------------------------
     """
-
-    # Your code here
-
+    gmovies = []
+    for g in movies:
+        parts = g.split("|")
+        genres = list(map(int, parts[4].split(',')))
+        for n in genres:
+            if n == genre:
+                title = parts[0]
+                gmovies.append(title)
     return gmovies
 
 
@@ -218,11 +223,15 @@ def get_by_genres(movies, genres):
             all the genres in genres (list of Movie)
     -------------------------------------------------------
     """
-
-    # Your code here
-
+    gmovies = []
+    genres_set = set(genres)
+    for m in movies:
+        parts = m.split("|")
+        movie_genres = list(map(int, parts[-1].split(',')))
+        genres_set_compare = set(movie_genres)
+        if genres_set == genres_set_compare:
+            gmovies.append(parts[0])
     return gmovies
-
 
 def genre_counts(movies):
     """
@@ -239,7 +248,14 @@ def genre_counts(movies):
             the matching genre in Movie.GENRES. (list of int)
     -------------------------------------------------------
     """
-
-    # Your code here
-
-    return counts
+    count = []
+    genres = Movie.GENRES
+    for index in range(len(genres)):
+        count.append(index - index)
+    for m in movies:
+        parts = m.split("|")
+        if len(parts) > 4:
+            movie_genres = list(map(int, parts[4].split(',')))
+            for n in movie_genres:
+                count[n] += 1
+    return count

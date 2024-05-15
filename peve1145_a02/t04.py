@@ -1,6 +1,6 @@
 """
 ------------------------------------------------------------------------
-Assignment 2, Task 2
+Assignment 2, Task 4
 ------------------------------------------------------------------------
 Author: Robert Pevec
 ID:     169081145
@@ -9,7 +9,7 @@ __updated__ = '2024-05-15'
 ------------------------------------------------------------------------
 """
 
-from Movie_utilities import get_by_rating
+from Movie_utilities import get_by_genres
 movies_list = [
     "Dellamorte Dellamore|1994|Michele Soavi|7.2|3,4,5,8",
     "Dark City|1998|Alex Proyas|7.8|0",
@@ -33,6 +33,6 @@ movies_list = [
     "Wonder Woman|2017|Patty Jenkins|8.1|1,6",
     "Zulu|2013|Jerome Salle|6.7|2"
 ]
-selected_rating = 8
-rmovies = get_by_rating(movies_list, selected_rating)
-print(rmovies)
+selected_genre = [3, 4]
+gmovies = get_by_genres(movies_list, selected_genre)
+print(gmovies)
