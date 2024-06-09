@@ -125,3 +125,77 @@ class Queue:
         """
         for value in self._values:
             yield value
+
+    def __eq__(self, target):
+        """
+        ----------------
+        Determines whether two Queues are equal.
+        Values in self and target are compared and if all values are equal
+        and in the same order, returns True, otherwise returns False.
+        Use: equals = source == target
+        ---------------
+        Parameters:
+            target - a queue (Queue)
+        Returns:
+            equals - True if source contains the same values
+                as target in the same order, otherwise False. (boolean)
+        ---------------
+        """
+        equals = (self._count == target._count)
+
+        i = 0
+        while equals and i < self._count:
+            self_index = (self._front + i) % self._capacity
+            target_index = (target._front + i) % target._capacity
+            if self._values[self_index] != target._values[target_index]:
+                equals = False
+            i += 1
+
+        return equals
+
+    def combine(self, source1, source2):
+        """
+        -------------------------------------------------------
+        Combines two source queues into the current target queue.
+        When finished, the contents of source1 and source2 are interlaced
+        into target and source1 and source2 are empty.
+        Order of source values is preserved.
+        (iterative algorithm)
+        Use: target.combine(source1, source2)
+        -------------------------------------------------------
+        Parameters:
+            source1 - an array-based queue (Queue)
+            source2 - an array-based queue (Queue)
+        Returns:
+            None
+        -------------------------------------------------------
+        """
+        self._values = [None] * (source1._count + source2._count)
+        self._count = 0
+        self._front = 0
+        self._rear = 0
+
+        while source1._count > 0 or source2._count > 0:
+            if source1._count > 0:
+                self._values[self._rear] = source1._values[source1._front]
+                self._rear = (self._rear + 1) % len(self._values)
+                source1._front = (source1._front + 1) % source1._capacity
+                source1._count -= 1
+                self._count += 1
+            if source2._count > 0:
+                self._values[self._rear] = source2._values[source2._front]
+                self._rear = (self._rear + 1) % len(self._values)
+                source2._front = (source2._front + 1) % source2._capacity
+                source2._count -= 1
+                self._count += 1
+
+        # Clear source1 and source2
+        source1._values = [None] * source1._capacity
+        source1._front = None
+        source1._rear = 0
+        source1._count = 0
+
+        source2._values = [None] * source2._capacity
+        source2._front = None
+        source2._rear = 0
+        source2._count = 0

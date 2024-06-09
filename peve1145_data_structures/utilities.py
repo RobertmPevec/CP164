@@ -11,6 +11,7 @@ __updated__ = '2024-05-17'
 from Stack_array import Stack
 from Queue_array import Queue
 from Priority_Queue_array import Priority_Queue
+from List_array import List
 
 
 def array_to_stack(stack, source):
@@ -219,4 +220,93 @@ def priority_queue_test(a):
         print(pq.remove())
         print(list(pq))
     print(pq.is_empty())
+    return None
+
+
+def array_to_list(llist, source):
+    """
+    -------------------------------------------------------
+    Appends contests of source to llist. At finish, source is empty.
+    Last element in source is at rear of llist,
+    first element in source is at front of llist.
+    Use: array_to_list(llist, source)
+    -------------------------------------------------------
+    Parameters:
+        llist - a List object (List)
+        source - a Python list (list)
+    Returns:
+        None
+    -------------------------------------------------------
+    """
+    while source:
+        value = source.pop(0)
+        llist.append(value)
+    return None
+
+
+def list_to_array(llist, target):
+    """
+    -------------------------------------------------------
+    Removes contents of llist into target. At finish, llist is empty.
+    Front element of llist is at front of target,
+    rear element of llist is at rear of target.
+    Use: list_to_array(llist, target)
+    -------------------------------------------------------
+    Parameters:
+        llist - a List object (List)
+        target - a Python list (list)
+    Returns:
+        None
+    -------------------------------------------------------
+    """
+    while llist:
+        value = llist.pop(0)
+        target.append(value)
+    return None
+
+def list_test(source):
+    """
+    -------------------------------------------------------
+    Tests List implementation.
+    The methods of List are tested for both empty and
+    non-empty lists using the data in source
+    Use: list_test(source)
+    -------------------------------------------------------
+    Parameters:
+        source - list of data (list of ?)
+    Returns:
+        None
+    -------------------------------------------------------
+    """
+    lst = List()
+    print("Testing on empty list:")
+    print("Is empty:", lst.is_empty())
+    print("Length:", len(lst))
+    for item in source:
+        lst.append(item)
+    print("\nTesting on populated list:")
+    print("List contents:", lst._values)
+    print("Is empty:", lst.is_empty())
+    print("Length:", len(lst))
+    if len(lst) > 0:
+        print(f"Element at index 0 (before): {lst[0]}")
+        lst[0] = "TestItem"
+        print(f"Element at index 0 (after setting to 'TestItem'): {lst[0]}")
+    print("List contains 'TestItem':", "TestItem" in lst)  # Expected: True
+    print("List contains 'NonExistent':", "NonExistent" in lst)  # Expected: False
+    lst.insert(1, "InsertedItem")
+    print("List after inserting 'InsertedItem' at index 1:", lst._values)
+    removed_value = lst.remove("TestItem")
+    print(f"Removed value: {removed_value}")
+    print("List after removing 'TestItem':", lst._values)
+    print(f"Find 'InsertedItem' in list:", lst.find("InsertedItem"))  # Expected: 'InsertedItem'
+    print("Find 'NonExistent' in list:", lst.find("NonExistent"))  # Expected: None
+    count_value = lst.count("InsertedItem")
+    print(f"Count of 'InsertedItem' in list: {count_value}")
+    index_value = lst.index("InsertedItem")
+    print(f"Index of 'InsertedItem' in list: {index_value}")
+    if len(lst) > 0:
+        print("Minimum value in the list:", lst.min())
+        print("Maximum value in the list:", lst.max())
+
     return None

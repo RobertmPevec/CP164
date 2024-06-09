@@ -2,11 +2,11 @@
 -------------------------------------------------------
 Array version of the Priority Queue ADT.
 -------------------------------------------------------
-Author:  David Brown
-ID:      999999999
-Email:   dbrown@wlu.ca
+Author:  Robert Pevec
+ID:      169081145
+Email:   peve1145@mylaurier.ca
 Section: CP164 C
-__updated__ = "2019-04-27"
+__updated__ = "2024-06-01"
 -------------------------------------------------------
 """
 from copy import deepcopy
@@ -127,7 +127,6 @@ class Priority_Queue:
             self._first = None
         return self._first
 
-
     def __iter__(self):
         """
         FOR TESTING ONLY
@@ -142,3 +141,32 @@ class Priority_Queue:
         """
         for value in self._values:
             yield value
+
+    def split_key(self, key):
+        """
+        -------------------------------------------------------
+        Splits a priority queue into two depending on an external
+        priority key. The source priority queue is empty when the method
+        ends. The order of the values from source is preserved.
+        Use: target1, target2 = source.split_key(key)
+        -------------------------------------------------------
+        Parameters:
+            key - a data object (?)
+        Returns:
+            target1 - a priority queue that contains all values
+                with priority higher than key (Priority_Queue)
+            target2 - priority queue that contains all values with
+                priority lower than or equal to key (Priority_Queue)
+        -------------------------------------------------------
+        """
+        target1 = Priority_Queue()
+        target2 = Priority_Queue()
+        for value in self._values:
+            if value > key:
+                target1._values.append(value)
+            else:
+                target2._values.append(value)
+        self._values = []
+        self._first = None
+
+        return target1, target2
